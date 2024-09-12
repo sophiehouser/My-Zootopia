@@ -1,4 +1,5 @@
 import json
+import requests
 
 
 def load_data(file_path):
@@ -65,8 +66,28 @@ def generate_animals_html(template_path, data):
     return generated_html
 
 
+def get_animal_data(name):
+    """
+    Retrieves animal data from the API-Ninjas endpoint
+    @param name: String
+    @return: Dict
+    """
+    url = f"https://api.api-ninjas.com/v1/animals?name={name}"
+    headers = {
+        'X-Api-Key': 'HrahvM/EI8yih9CcACb4VQ==gfldZjQFdDlsr3bA'
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: API request failed with status code {response.status_code}")
+        return None
+
+
 def main():
-    data = load_data('animals_data.json')
+    data = get_animal_data("Fox")
     new_html = generate_animals_html("animals_template.html", data)
 
     with open('animals.html', 'w') as output_file:
