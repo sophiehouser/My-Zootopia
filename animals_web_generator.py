@@ -14,16 +14,17 @@ def get_animal_info(data):
         output += '<li class="cards__item">'
 
         if 'name' in animal_data and animal_data['name']:
-            output += f"Name: {animal_data['name']}\n"
+            output += f"<div class=\"card__title\">{animal_data['name']}</div>"
 
+        output += "<p class=\"card__text\">"
         if 'characteristics' in animal_data:
             if 'diet' in animal_data['characteristics'] and animal_data['characteristics']['diet']:
-                output += f"Diet: {animal_data['characteristics']['diet']}\n"
+                output += f"<strong>Diet:</strong> {animal_data['characteristics']['diet']}<br/>"
             if 'type' in animal_data['characteristics'] and animal_data['characteristics']['type']:
-                output += f"Type: {animal_data['characteristics']['type']}\n"
+                output += f"<strong>Type:</strong> {animal_data['characteristics']['type']}<br/>"
 
         if 'locations' in animal_data and animal_data['locations']:
-            output += f"Location: {animal_data['locations'][0]}\n"
+            output += f"<strong>Location:</strong> {animal_data['locations'][0]}<br/>"
 
         output += '</li>'
 
