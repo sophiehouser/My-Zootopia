@@ -2,6 +2,8 @@ import json
 import requests
 
 
+NEW_HTML_FILE = "animals.html"
+
 def load_data(file_path):
     """
     Loads a JSON file
@@ -80,17 +82,24 @@ def get_animal_data(name):
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+        if not data:
+            print("Error: No animals found with the given name.")
+            return []
+        else:
+            print(f"Website was successfully generated to the file {NEW_HTML_FILE}.")
+            return data
     else:
         print(f"Error: API request failed with status code {response.status_code}")
         return None
 
 
 def main():
-    data = get_animal_data("Fox")
+    name = input("Enter the name of the animal: ")
+    data = get_animal_data(name)
     new_html = generate_animals_html("animals_template.html", data)
 
-    with open('animals.html', 'w') as output_file:
+    with open(NEW_HTML_FILE, 'w') as output_file:
         output_file.write(new_html)
 
 
