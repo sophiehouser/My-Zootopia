@@ -52,18 +52,26 @@ def serialize_animals(data):
     return output
 
 
-def generate_animals_html(template_path, data):
+def write_animals_file(template_path, html):
+    with open(NEW_HTML_FILE, 'w') as output_file:
+        output_file.write(html)
+
+
+def generate_animals_html(template_path, data, name):
     """ Generates HTML content by replacing placeholder with animal info
     @param template_path: String
     @param data: Dict
     @return: String
     """
-    with open(template_path, 'r') as template_file:
-        template_content = template_file.read()
+    if not data:
+        generated_html = f"<h2>The animal \"{name}\" doesn't exist.</h2>"
+    else:
+        with open(template_path, 'r') as template_file:
+            template_content = template_file.read()
 
-    animal_info = serialize_animals(data)
+        animal_info = serialize_animals(data)
 
-    generated_html = template_content.replace('__REPLACE_ANIMALS_INFO__', animal_info)
+        generated_html = template_content.replace('__REPLACE_ANIMALS_INFO__', animal_info)
 
     return generated_html
 
@@ -96,11 +104,10 @@ def get_animal_data(name):
 
 def main():
     name = input("Enter the name of the animal: ")
-    data = get_animal_data(name)
-    new_html = generate_animals_html("animals_template.html", data)
 
-    with open(NEW_HTML_FILE, 'w') as output_file:
-        output_file.write(new_html)
+    data = get_animal_data(name)
+    new_html = generate_animals_html("animals_template.html", data, name)
+    write_animals_file(NEW_HTML_FILE, new_html)
 
 
 if __name__ == '__main__':
