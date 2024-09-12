@@ -11,6 +11,8 @@ def get_animal_info(data):
     """ Prints all animals """
     output = ''
     for animal_data in data:
+        output += '<li class="cards__item">'
+
         if 'name' in animal_data and animal_data['name']:
             output += f"Name: {animal_data['name']}\n"
 
@@ -22,6 +24,8 @@ def get_animal_info(data):
 
         if 'locations' in animal_data and animal_data['locations']:
             output += f"Location: {animal_data['locations'][0]}\n"
+
+        output += '</li>'
 
     return output
 
