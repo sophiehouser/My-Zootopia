@@ -169,6 +169,9 @@
                 </messages>
                 <updatedAt value="2024-09-12T13:24:00.714465" />
               </chat>
+              <chat>
+                <internalId value="5a299af3-85b9-4352-bd5f-c6bb8c315a83" />
+              </chat>
             </list>
           </chats>
           <defaultLlm>

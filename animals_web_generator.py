@@ -1,8 +1,9 @@
 import json
 import requests
-
+import data_fetcher
 
 NEW_HTML_FILE = "animals.html"
+
 
 def load_data(file_path):
     """
@@ -105,7 +106,7 @@ def get_animal_data(name):
 def main():
     name = input("Enter the name of the animal: ")
 
-    data = get_animal_data(name)
+    data = data_fetcher.fetch_data(name)
     new_html = generate_animals_html("animals_template.html", data, name)
     write_animals_file(NEW_HTML_FILE, new_html)
 
