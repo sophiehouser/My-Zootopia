@@ -53,7 +53,7 @@ def serialize_animals(data):
 
 
 def write_animals_file(template_path, html):
-    with open(NEW_HTML_FILE, 'w') as output_file:
+    with open(template_path, 'w') as output_file:
         output_file.write(html)
 
 
@@ -74,32 +74,6 @@ def generate_animals_html(template_path, data, name):
         generated_html = template_content.replace('__REPLACE_ANIMALS_INFO__', animal_info)
 
     return generated_html
-
-
-def get_animal_data(name):
-    """
-    Retrieves animal data from the API-Ninjas endpoint
-    @param name: String
-    @return: Dict
-    """
-    url = f"https://api.api-ninjas.com/v1/animals?name={name}"
-    headers = {
-        'X-Api-Key': 'HrahvM/EI8yih9CcACb4VQ==gfldZjQFdDlsr3bA'
-    }
-
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
-        data = response.json()
-        if not data:
-            print("Error: No animals found with the given name.")
-            return []
-        else:
-            print(f"Website was successfully generated to the file {NEW_HTML_FILE}.")
-            return data
-    else:
-        print(f"Error: API request failed with status code {response.status_code}")
-        return None
 
 
 def main():
